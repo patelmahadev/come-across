@@ -1,5 +1,12 @@
 version: '2'
 services:
+  webpacker:
+    image: ${DOCKER_IMAGE_NAME-docker1.2}
+    command: ["./scripts/start_webpack_dev.sh"]
+    volumes:
+      - .:/opt/docker1.2:cached
+    ports:
+      - 3035:3035 
   db:
     image: postgres:11
     restart: always
@@ -12,15 +19,17 @@ services:
       - "5432:5432"
   app:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/start_rails.sh"]
     volumes:
-      - ".:/come_across"
+      - .:/opt/docker1.2:cached
     ports:
       - "3001:3000"
     depends_on:
       - db
+      - webpacker
     links:
       - db
+      - webpacker
     environment:
       DB_USER: postgres
       DB_NAME: come_across
