@@ -1,18 +1,15 @@
-# README
-
 This README would normally document whatever steps are necessary to get the application up and running.
 
-Ruby Version : 3.0.0
+- **About Come-Across**: A online web application platform where you can record the places visited by you with latitude and longitude. All the visited places will be visible on Google map with markers.
 
-Rails Version : 6.1.7.3
+- **Dependencies**: You will need the following dependencies to successfully run the project at your machiene.
+  - Ubuntu > 18.04
+  - Docker > 20.10.0
 
-Database : Postgresql 11
+- **Commands**:
+  - docker-compose build // if there permission error run the command with sudo
+  - docker-compose run app rails db:create
+  - docker-compose run app rails db:migrate
+  - docker-compose up
 
-Environment Varibles : for that you have to create .env file in the project root directory & then define the enviorment varibles. the sample 
-.env file I have push on git.
-
-How to run at your Local:
-
-docker-compose build
-docker-compose up
-
+- open https://0.0.0.0:3001 in the browser. Great work!
