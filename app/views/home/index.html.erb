@@ -1,0 +1,33 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Come Across</h1>
+        <p class="lead text-muted">A online web platform where you can add places of differnt categories like Landscape, People & Food visited by You. You can see all these places on Google Map.</p>
+        <p>
+          <a href="/places/new" class="btn btn-primary my-2">Add New Place</a>
+          <a href="/places" class="btn btn-secondary">Places List</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row py-lg-2">
+      <div id="map" style='height: 900px;'></div>
+    </div>
+  </section>
+</main>
+
+
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function() {
+    console.log(<%=raw @places.to_json %>)
+    markers = handler.addMarkers(<%=raw @places.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

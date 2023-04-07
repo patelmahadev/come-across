@@ -1,0 +1,49 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5 border">
+      <div class="col-lg-12 col-md-8 mx-auto">
+        <h1 class="fw-light">Visted Places</h1>
+        <p id="notice"><%= notice %>
+        <table class='table table-striped'>
+          <thead class='thead-dark'>
+            <tr>
+              <th>Name</th>
+              <th>Latitude</th>
+              <th>Longtitude</th>
+              <th>Photos</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @places.each do |place| %>
+              <tr>
+                <td><%= place.name %></td>
+                <td><%= place.latitude %></td>
+                <td><%= place.longtitude %></td>
+                <td>
+                  <% place.pictures.each do |pic| %>
+                    <%= link_to image_tag(url_for(pic), width:"40", height:"40"),  url_for(pic), target:'_blank' %>
+                  <% end %>
+                <td><%= link_to 'Edit', edit_place_path(place),class: "btn btn-primary" %></td>
+                <td><%= link_to 'Show', place_path(place),class: "btn btn-primary" %></td>
+                <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+
+
+        <p>
+          <a href="/" class="btn btn-secondary">Home</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+

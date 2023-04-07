@@ -1,0 +1,50 @@
+<%= form_with(model: place) do |form| %>
+  <% if place.errors.any? %>
+      <div id="error_explanation">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+      <ul>
+        <% place.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row mb-5">
+    <%= form.label :name, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-6">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+
+  <div class="form-group row mb-5">
+    <%= form.label :latitude, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-6">
+      <%= form.text_field :latitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-5">
+    <%= form.label :longtitude, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-6">
+      <%= form.text_field :longtitude, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row mb-5">
+    <%= form.label :pictures, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-6">
+      <% 3.times do %>
+        <%= form.file_field :pictures, multiple: true, class: 'form-control' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions float-end">
+    <%= form.submit :Save, class: 'btn btn-success' %>
+    <a href="/" class="btn btn-secondary">Home</a>
+  </div>
+
+
+<% end %>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ComeAcross</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_api_key']}" %>
+    <%= javascript_include_tag '//cdn.jsdelivr.net/gmaps4rails/2.1.2/gmaps4rails.js' %> 
+    <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'%>
+    <%= javascript_include_tag '//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>    
+  </head>
+
+  <body>
+    <%= render "shared/header" %>
+    <%= yield %>
+  </body>
+</html>

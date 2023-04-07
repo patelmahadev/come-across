@@ -1,0 +1,80 @@
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light"><%= @place.name%>(<%= @place.latitude%>, <%= @place.longtitude%>)</h1>
+        <p class="lead text-muted"></p>
+        <p>
+          <a href="/places/new" class="btn btn-primary my-2">Add New Place</a>
+          <a href="/" class="btn btn-secondary">Home</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row py-lg-2">
+      <% @place.pictures.each do |pic| %>
+        <div class="col-lg-4 col-md-8 mx-auto border">
+          <%= image_tag(url_for(pic), height:"auto", width:"80%") %>
+        </div>  
+      <% end %>
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <h4 class="fw-light">Add a Comment</h4>
+    <div class="row py-lg-2 border">
+      <div class="col-lg-6 col-md-8 mx-auto">        
+        <%= form_with model: [@place, @place.comments.build] do |form|%>
+          <div class="form-group row mb-5">
+            <%= form.label :commentor, class: 'col-sm-2 col-form-label' %>
+            <div class="col-sm-6">
+              <%= form.text_field :commentor, class: 'form-control' %>
+            </div>
+          </div>        
+        <div class="form-group row mb-5">
+          <%= form.label :body, class: 'col-sm-2 col-form-label' %>
+          <div class="col-sm-6">
+            <%= form.text_field :body, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="actions float-end">
+          <%= form.submit :Save, class: 'btn btn-success' %>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container">
+    <h4 class="fw-light">Comments</h4>    
+    <div class="row py-lg-2 border">
+      <div class="col-lg-6 col-md-8">        
+        <% @place.comments.order('id desc').each do |comment| %>
+          <h6><%= comment.commentor %>:</h6>
+          <p><%= comment.body %></p>
+          <p class="text-muted"><%= time_ago_in_words(comment.created_at) %>ago</p>
+        <%end%>
+      </div>
+    </div>
+  </section>
+
+
+
+
+</main>
+
+
+
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function() {
+    console.log(<%=raw @places.to_json %>)
+    markers = handler.addMarkers(<%=raw @places.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
