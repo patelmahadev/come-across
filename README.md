@@ -11,5 +11,8 @@ This README would normally document whatever steps are necessary to get the appl
   - docker-compose run app rails db:create
   - docker-compose run app rails db:migrate
   - docker-compose up
+  
+- **Erros**:
+  - If you get webpacker not found manifest.json file then you can manually create manifest.json file under public/packs folder.
 
 - open https://0.0.0.0:3001 in the browser. Great work!
